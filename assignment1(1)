@@ -1,0 +1,170 @@
+    -- Assingment       
+CREATE TABLE Lewandowski (
+    Goals VARCHAR(20),
+    Assists VARCHAR(100)
+);
+
+select *
+from lewandowski
+
+CREATE TABLE Suarez (
+    Goals VARCHAR(20),
+    Assists VARCHAR(100)
+);
+
+select *
+from Suarez
+
+CREATE TABLE Ronaldo (
+    Goals VARCHAR(20),
+    Assists VARCHAR(100)
+);
+
+select *
+from Ronaldo
+
+CREATE TABLE FootballerData (
+	name VARCHAR(20),
+    email VARCHAR(20),
+    number VARCHAR(100)
+);
+
+select *
+from FootballerData
+
+CREATE TABLE Transfer (
+	name VARCHAR(20),
+    club VARCHAR(20),
+    price int
+);
+
+select *
+from Transfer
+
+INSERT INTO Lewandowski (Goals, Assists) VALUES
+(30, 10);
+
+INSERT INTO Suarez (Goals, Assists) VALUES
+(20, 15);
+
+INSERT INTO Ronaldo (Goals, Assists) VALUES
+(60, 20);
+
+INSERT INTO FootballerData (name, email, number) VALUES
+('Lewandowski', 'lewa228', '333-555'),
+('Suarez', 'suarezbem', '222-222'),
+('Ronaldo', 'goat', '777-777');
+
+INSERT INTO Transfer (name, club, price) VALUES
+('Lewandowski', 'Bayern', 100000000),
+('Suarez', 'Barca', 75000000),
+('Ronaldo', 'Real', 300000000);
+
+
+-- WITH PlayerStats AS (
+--     SELECT 'Lewandowski' AS Name, Goals, Assists
+--     FROM Lewandowski
+--     union
+--     SELECT 'Suarez', Goals, Assists
+--     FROM Suarez
+--     union
+--     SELECT 'Ronaldo', Goals, Assists
+--     FROM Ronaldo
+-- )
+-- SELECT 
+--     p.Name, 
+--     p.Goals, 
+--     p.Assists, 
+--     t.club AS Club, 
+--     t.price AS Price, 
+--     f.number AS PhoneNumber, 
+--     f.email AS Email
+-- FROM PlayerStats p
+-- JOIN Transfer t ON p.Name = t.name
+-- JOIN FootballerData f ON p.Name = f.name
+-- ORDER BY t.price DESC;	
+
+
+CREATE TABLE AdditionalData (
+    name VARCHAR(20),
+    agent VARCHAR(50) 
+);
+
+select*
+from additionaldata
+
+INSERT INTO AdditionalData (name, agent) VALUES
+('Lewandowski', 'Pini Zahavi'),
+('Suarez', 'Alejandro Balbi'),
+('Ronaldo', 'Jorge Mendes');
+
+create table sponsorships (
+    name varchar(20),
+    sponsor varchar(50)
+);
+
+insert into sponsorships (name, sponsor) values
+('lewandowski', 'Nike'),
+('suarez', 'Adidas'),
+('ronaldo', 'Nike');
+
+create table familystatus (
+    name varchar(20),
+    marital_status varchar(20),  
+    children_count int
+);
+
+insert into familystatus (name, marital_status, children_count) values
+('lewandowski', 'married', 2),
+('suarez', 'married', 3),
+('ronaldo', 'single', 4);
+
+
+with playerstats as (
+    select 'lewandowski' as name, goals, assists
+    from lewandowski
+    union
+    select 'suarez', goals, assists
+    from suarez
+    union
+    select 'ronaldo', goals, assists
+    from ronaldo
+)
+select 
+    p.name, 
+    p.goals, 
+    p.assists, 
+    t.club as club, 
+    t.price as price, 
+    f.number as phonenumber, 
+    f.email as email,
+    ad.agent as agent,
+    fs.marital_status as marital_status,
+    fs.children_count as children_count,
+    s.sponsor as sponsor
+from playerstats p
+join transfer t on p.name = t.name      
+join footballerdata f on p.name = f.name 
+join additionaldata ad on p.name = ad.name 
+join familystatus fs on p.name = fs.name
+join sponsorships s on p.name = s.name
+order by t.price desc;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
